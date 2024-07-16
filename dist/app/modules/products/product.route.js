@@ -9,9 +9,9 @@ const validateRequest_1 = __importDefault(require("../middlewares/validateReques
 const product_validation_1 = __importDefault(require("./product.validation"));
 const product_controller_1 = require("./product.controller");
 const router = express_1.default.Router();
-router.post("/", (0, validateRequest_1.default)(product_validation_1.default), product_controller_1.ProductControllers.createProduct);
-router.get("/", product_controller_1.ProductControllers.getAllProducts);
-router.get("/:productId", product_controller_1.ProductControllers.getSingleProduct);
-router.put("/:productId", product_controller_1.ProductControllers.updateSingleProduct);
-router.delete("/:productId", product_controller_1.ProductControllers.deleteSingleProduct);
+router.post("/product", (0, validateRequest_1.default)(product_validation_1.default), product_controller_1.ProductControllers.createProduct);
+router.get("/products", product_controller_1.ProductControllers.getAllProducts);
+router.get("/product/:productId", product_controller_1.ProductControllers.getSingleProduct);
+router.put("/product/:productId", product_controller_1.ProductControllers.updateSingleProduct);
+router.delete("/product/:productId", product_controller_1.ProductControllers.deleteSingleProduct);
 exports.ProductRoutes = router;

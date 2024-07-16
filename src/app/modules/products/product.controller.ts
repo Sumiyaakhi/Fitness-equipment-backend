@@ -22,9 +22,58 @@ const createProduct = async (req: Request, res: Response) => {
     });
   }
 };
+const createCartProduct = async (req: Request, res: Response) => {
+  const cartProduct = req.body;
+  // console.log(productData);
+  // Proceed to create the product if validation passes
+  try {
+    const result = await ProductServices.createProduct(cartProduct);
+    console.log(result);
+    res.json({
+      success: true,
+      message: "Cart Product created successfully!",
+      data: result,
+    });
+  } catch (err: any) {
+    res.status(500).json({
+      success: false,
+      message: "Failed to create product",
+      error: err.message,
+    });
+  }
+};
 
 // get all products and search products by name
 const getAllProducts = async (req: Request, res: Response) => {
+  try {
+    const { searchTerm } = req.query;
+
+    let result;
+    if (searchTerm && typeof searchTerm === "string") {
+      result = await ProductServices.searchProductsByName(searchTerm);
+      res.status(200).json({
+        success: true,
+        message: `Products matching search term '${searchTerm}' fetched successfully!`,
+        data: result,
+      });
+    } else {
+      result = await ProductServices.getAllProduct();
+      res.status(200).json({
+        success: true,
+        message: "Products are fetched successfully!",
+        data: result,
+      });
+    }
+  } catch (err: any) {
+    res.status(500).json({
+      success: false,
+      message: "An error occurred while fetching products.",
+      error: err.message,
+    });
+  }
+};
+// get all products and search products by name
+const getAllCartProducts = async (req: Request, res: Response) => {
   try {
     const { searchTerm } = req.query;
 
@@ -143,7 +192,9 @@ const deleteSingleProduct = async (req: Request, res: Response) => {
 
 export const ProductControllers = {
   createProduct,
+  createCartProduct,
   getAllProducts,
+  getAllCartProducts,
   getSingleProduct,
   updateSingleProduct,
   deleteSingleProduct,

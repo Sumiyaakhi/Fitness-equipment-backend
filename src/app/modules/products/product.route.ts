@@ -6,13 +6,13 @@ import { ProductControllers } from "./product.controller";
 const router = express.Router();
 
 router.post(
-  "/",
+  "/product",
   validateRequest(productValidationSchema),
   ProductControllers.createProduct
 );
-router.get("/", ProductControllers.getAllProducts);
-router.get("/:productId", ProductControllers.getSingleProduct);
-router.put("/:productId", ProductControllers.updateSingleProduct);
-router.delete("/:productId", ProductControllers.deleteSingleProduct);
+router.get("/products", ProductControllers.getAllProducts);
+router.get("/product/:productId", ProductControllers.getSingleProduct);
+router.put("/product/:productId", ProductControllers.updateSingleProduct);
+router.delete("/product/:productId", ProductControllers.deleteSingleProduct);
 
 export const ProductRoutes = router;

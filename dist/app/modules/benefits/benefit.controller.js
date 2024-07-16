@@ -9,69 +9,69 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.ProductControllers = void 0;
-const product_service_1 = require("./product.service");
-// create product
-const createProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const productData = req.body;
-    // console.log(productData);
-    // Proceed to create the product if validation passes
+exports.BenefitControllers = void 0;
+const benefit_service_1 = require("./benefit.service");
+// create Benefit
+const createBenefit = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const benefitData = req.body;
+    console.log(benefitData);
+    // Proceed to create the Benefit if validation passes
     try {
-        const result = yield product_service_1.ProductServices.createProduct(productData);
+        const result = yield benefit_service_1.BenefitServices.createBenefit(benefitData);
         console.log(result);
         res.json({
             success: true,
-            message: "Product created successfully!",
+            message: "Benefit data created successfully!",
             data: result,
         });
     }
     catch (err) {
         res.status(500).json({
             success: false,
-            message: "Failed to create product",
+            message: "Failed to create benefit",
             error: err.message,
         });
     }
 });
-const createCartProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const cartProduct = req.body;
-    // console.log(productData);
-    // Proceed to create the product if validation passes
+const createImages = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const data = req.body;
+    console.log(data);
+    // Proceed to create the Benefit if validation passes
     try {
-        const result = yield product_service_1.ProductServices.createProduct(cartProduct);
+        const result = yield benefit_service_1.BenefitServices.createImages(data);
         console.log(result);
         res.json({
             success: true,
-            message: "Cart Product created successfully!",
+            message: "data created successfully!",
             data: result,
         });
     }
     catch (err) {
         res.status(500).json({
             success: false,
-            message: "Failed to create product",
+            message: "Failed to create data",
             error: err.message,
         });
     }
 });
-// get all products and search products by name
-const getAllProducts = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+// get all Benefits and search Benefits by name
+const getAllBenefits = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { searchTerm } = req.query;
         let result;
         if (searchTerm && typeof searchTerm === "string") {
-            result = yield product_service_1.ProductServices.searchProductsByName(searchTerm);
+            result = yield benefit_service_1.BenefitServices.searchBenefitsByName(searchTerm);
             res.status(200).json({
                 success: true,
-                message: `Products matching search term '${searchTerm}' fetched successfully!`,
+                message: `Benefits matching search term '${searchTerm}' fetched successfully!`,
                 data: result,
             });
         }
         else {
-            result = yield product_service_1.ProductServices.getAllProduct();
+            result = yield benefit_service_1.BenefitServices.getAllBenefit();
             res.status(200).json({
                 success: true,
-                message: "Products are fetched successfully!",
+                message: "Benefits are fetched successfully!",
                 data: result,
             });
         }
@@ -79,29 +79,28 @@ const getAllProducts = (req, res) => __awaiter(void 0, void 0, void 0, function*
     catch (err) {
         res.status(500).json({
             success: false,
-            message: "An error occurred while fetching products.",
+            message: "An error occurred while fetching Benefits.",
             error: err.message,
         });
     }
 });
-// get all products and search products by name
-const getAllCartProducts = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const getAllImages = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const { searchTerm } = req.query;
         let result;
         if (searchTerm && typeof searchTerm === "string") {
-            result = yield product_service_1.ProductServices.searchProductsByName(searchTerm);
+            result = yield benefit_service_1.BenefitServices.searchBenefitsByName(searchTerm);
             res.status(200).json({
                 success: true,
-                message: `Products matching search term '${searchTerm}' fetched successfully!`,
+                message: `Benefits matching search term '${searchTerm}' fetched successfully!`,
                 data: result,
             });
         }
         else {
-            result = yield product_service_1.ProductServices.getAllProduct();
+            result = yield benefit_service_1.BenefitServices.getAllImages();
             res.status(200).json({
                 success: true,
-                message: "Products are fetched successfully!",
+                message: "Benefits are fetched successfully!",
                 data: result,
             });
         }
@@ -109,36 +108,36 @@ const getAllCartProducts = (req, res) => __awaiter(void 0, void 0, void 0, funct
     catch (err) {
         res.status(500).json({
             success: false,
-            message: "An error occurred while fetching products.",
+            message: "An error occurred while fetching Benefits.",
             error: err.message,
         });
     }
 });
-// get single product
-const getSingleProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+// get single Benefit
+const getSingleBenefit = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { productId } = req.params;
-        const result = yield product_service_1.ProductServices.getSingleProduct(productId);
+        const { benefitId } = req.params;
+        const result = yield benefit_service_1.BenefitServices.getSingleBenefit(benefitId);
         res.status(200).json({
             success: true,
-            message: "Product is retrieved successfully!",
+            message: "Benefit is retrieved successfully!",
             data: result,
         });
     }
     catch (err) {
         res.status(500).json({
             success: false,
-            message: "Could not match product!",
+            message: "Could not match Benefit!",
             error: err,
         });
     }
 });
-//update single product
-const updateSingleProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+//update single Benefit
+const updateSingleBenefit = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { productId } = req.params;
+        const { benefitId } = req.params;
         const updateData = req.body;
-        // const { error } = productValidationSchema.validate(updateData);
+        // const { error } = BenefitValidationSchema.validate(updateData);
         // // Check for validation errors
         // if (error) {
         //   return res.status(400).json({
@@ -147,62 +146,62 @@ const updateSingleProduct = (req, res) => __awaiter(void 0, void 0, void 0, func
         //     error: error.details,
         //   });
         // }
-        const updatedProduct = yield product_service_1.ProductServices.updateSingleProduct(productId, updateData);
-        if (updatedProduct) {
+        const updatedBenefit = yield benefit_service_1.BenefitServices.updateSingleBenefit(benefitId, updateData);
+        if (updatedBenefit) {
             res.status(200).json({
                 success: true,
-                message: "Product updated successfully!",
-                data: updatedProduct,
+                message: "Benefit updated successfully!",
+                data: updatedBenefit,
             });
         }
         else {
             res.status(404).json({
                 success: false,
-                message: "Product not found!",
+                message: "Benefit not found!",
             });
         }
     }
     catch (err) {
         res.status(500).json({
             success: false,
-            message: "Could not update product!",
+            message: "Could not update Benefit!",
             error: err.message,
         });
     }
 });
-// delete a single product
-const deleteSingleProduct = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+// delete a single Benefit
+const deleteSingleBenefit = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const { productId } = req.params;
-        const deletedProduct = yield product_service_1.ProductServices.deleteSingleProduct(productId);
-        if (deletedProduct) {
+        const { BenefitId } = req.params;
+        const deletedBenefit = yield benefit_service_1.BenefitServices.deleteSingleBenefit(BenefitId);
+        if (deletedBenefit) {
             res.status(200).json({
                 success: true,
-                message: "Product deleted successfully!",
+                message: "Benefit deleted successfully!",
                 data: null,
             });
         }
         else {
             res.status(404).json({
                 success: false,
-                message: "Product not found!",
+                message: "Benefit not found!",
             });
         }
     }
     catch (err) {
         res.status(500).json({
             success: false,
-            message: "Could not delete product!",
+            message: "Could not delete Benefit!",
             error: err.message,
         });
     }
 });
-exports.ProductControllers = {
-    createProduct,
-    createCartProduct,
-    getAllProducts,
-    getAllCartProducts,
-    getSingleProduct,
-    updateSingleProduct,
-    deleteSingleProduct,
+exports.BenefitControllers = {
+    createBenefit,
+    createImages,
+    getAllBenefits,
+    getAllImages,
+    getSingleBenefit,
+    updateSingleBenefit,
+    deleteSingleBenefit,
 };
